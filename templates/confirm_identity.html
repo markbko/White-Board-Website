@@ -1,0 +1,37 @@
+<html>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        window.addEventListener ("load", function () {
+            var checkbox = document.getElementById ('{{form.toggle_pw.id}}');
+            var x = document.getElementById ('{{form.password.id}}');
+            checkbox.addEventListener ('change', function () {
+                if (this.checked) {
+                    x.type = 'text';
+                } else {
+                    x.type = 'password';
+                }
+            });
+        })
+    </script>
+    <h1>Confirm Identity {{ g.user[1] }}</h1>
+    <br>
+    {% for field, errors in form.errors.items() %}
+        <p style="color: red">{{ ', '.join(errors) }}</p>
+    {% endfor %}
+    <br>
+    <form class="form-horizontal" method="POST" action="{{ url_for('confirm_identity') }}">
+        {{ form.csrf_token() }}
+        <div class="form-group">
+             {{ form.password.label }}
+             {{ form.password(class="form-control") }}
+        </div>
+        <div class="form-group">
+             {{ form.toggle_pw.label }}
+             {{ form.toggle_pw(class="form-control") }}
+        </div>
+         <div class="form-group">
+            {{ form.submit }}
+        </div>
+    </form>
+
+</html>

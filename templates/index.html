@@ -1,0 +1,162 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+         <title>Project-Brainstorm</title>
+         <style>
+             .button {
+                background-color: #1c87c9;
+                border: none;
+                color: white;
+                padding: 20px 34px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                margin: 4px 2px;
+                cursor: pointer;
+                margin-left: auto;
+                margin-right: auto;
+                display:inline-block;
+            }
+             canvas {
+             border: 4px solid black;
+             width: 1080px;
+             height: 720px;
+             margin-left: auto;
+    margin-right: auto;
+    display: block;
+             }
+             h1 {
+                 text-align: center;
+             }
+             .flex-parent {
+                display: flex;
+                }
+
+                .jc-center {
+                justify-content: center;
+                }
+
+                button.margin-right {
+                margin-right: 20px;
+                }
+             html, body {
+                width: 100%;
+                height:100%;
+                }
+                
+                body {
+                    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                    background-size: 400% 400%;
+                    animation: gradient 15s ease infinite;
+                }
+                
+                @keyframes gradient {
+                    0% {
+                        background-position: 0% 50%;
+                    }
+                    50% {
+                        background-position: 100% 50%;
+                    }
+                    100% {
+                        background-position: 0% 50%;
+                    }
+                }
+                .button button {
+                    background-color: #04AA6D; /* Green background */
+                    border: 1px solid green; /* Green border */
+                    color: white; /* White text */
+                    padding: 10px 24px; /* Some padding */
+                    cursor: pointer; /* Pointer/hand icon */
+                    float: left; /* Float the buttons side by side */
+                    }
+
+                    /* Clear floats (clearfix hack) */
+                    .button:after {
+                    content: "";
+                    clear: both;
+                    display: table;
+                    }
+
+                    .button button:not(:last-child) {
+                    border-right: none; /* Prevent double borders */
+                    }
+
+                    /* Add a background color on hover */
+                    .button button:hover {
+                    background-color: #3e8e41;
+                    }
+         </style>
+         <script type="text/javascript" src="underscore-min.js"></script>
+         <script type="text/javascript" src="backbone-min.js"></script>
+         <script type="text/javascript" src="two.min.js"></script>
+         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.min.js"></script>
+         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.clean.js"></script>
+         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.js"></script>
+     </head>
+    <body>
+        <h1>Welcome to<h1>
+        <h1>Project Brainstorm</h1>
+        <div class="flex-parent jc-center">
+            <a href="/register" class="button" class="green margin-right">Register</a>
+            <a href="/login" class="button" class="green margin-right">Login</a>
+            <a href="/draw" class="button" class="green margin-right">Draw</a>
+            <a href="/session" class="button" class="green margin-right">Chat</a>
+        </div>
+        
+        <br>
+        {% if g.user%}
+            <div class="flex-parent jc-center">
+                <a href="/signout" class="button" class="green margin-right">Logout</a>
+                <a href="/profile" class="button" class="green margin-right">Profile info</a>
+            </div>
+            <br>
+        {% endif %}
+        <canvas id="myPics" width="1080" height="720"></canvas>
+        <script type="text/javascript">
+            let isDrawing = false;
+            let x = 0;
+            let y = 0;
+
+            const myPics = document.getElementById('myPics');
+            const context = myPics.getContext('2d');
+
+            // event.offsetX, event.offsetY gives the (x,y) offset from the edge of the canvas.
+
+            // Add the event listeners for mousedown, mousemove, and mouseup
+            myPics.addEventListener('mousedown', e => {
+            x = e.offsetX;
+            y = e.offsetY;
+            isDrawing = true;
+            });
+
+            myPics.addEventListener('mousemove', e => {
+            if (isDrawing === true) {
+                drawLine(context, x, y, e.offsetX, e.offsetY);
+                x = e.offsetX;
+                y = e.offsetY;
+            }
+            });
+
+            window.addEventListener('mouseup', e => {
+            if (isDrawing === true) {
+                drawLine(context, x, y, e.offsetX, e.offsetY);
+                x = 0;
+                y = 0;
+                isDrawing = false;
+            }
+            });
+
+            function drawLine(context, x1, y1, x2, y2) {
+            context.beginPath();
+            context.strokeStyle = 'black';
+            context.lineWidth = 3;
+            context.moveTo(x1, y1);
+            context.lineTo(x2, y2);
+            context.stroke();
+            context.closePath();
+            }
+            
+        </script>
+    </body>
+</html>

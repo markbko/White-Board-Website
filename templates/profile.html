@@ -1,0 +1,67 @@
+<html lang="en">
+    <head>
+        <style>
+            .flex-parent {
+                display: flex;
+                }
+
+                .jc-center {
+                justify-content: center;
+                }
+
+                button.margin-right {
+                margin-right: 20px;
+                }
+                .button {
+                background-color: #1c87c9;
+                border: none;
+                color: white;
+                padding: 20px 34px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                margin: 4px 2px;
+                cursor: pointer;
+                margin-left: auto;
+                margin-right: auto;
+                border: black;
+            }
+            .container{
+                width: 20%;
+                margin: auto;
+                margin-top: 150px;
+                box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+                border-radius: 5px;
+                position: relative;
+                z-index: 1;
+                background: inherit;
+                overflow: hidden;
+                padding: 20px;
+            }
+            p{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    <div class = "container">
+        <h1>Welcome Back {{ g.user[1] }}</h1>
+        <form class="form-horizontal" method="POST" action=" {{ url_for('login') }}">
+            <p>Your Profile Information:</p>
+            <p>First Name: {{ g.user[4] }}</p>
+            <p>Last Name: {{ g.user[5] }}</p>
+            <p>Date Of Birth: {{ g.user[6] }}</p>
+            <p>Gender: {{ g.user[7] }}</p>
+            <p>Account Created: {{ g.user[3] }}</p>
+        </form>
+        <div class="flex-parent jc-center">
+            <a href="/confirm_identity" class="button" class="green margin-right">Edit Info</a>
+            <a href="/" class="button" class="green margin-right">Home</a>
+            <a href="/signout" class="button" class="green margin-right">Logout</a>
+            </div>
+    </div>
+
+
+</html>

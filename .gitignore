@@ -1,0 +1,6 @@
+__pycache__/app.cpython-39.pyc
+.idea/
+.auth/
+__pycache__/database_mangement.cpython-39.pyc
+__pycache__/login.cpython-39.pyc
+__pycache__/register_user.cpython-39.pyc

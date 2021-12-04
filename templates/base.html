@@ -1,0 +1,17 @@
+<html>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <head>
+        <title>Project Brainstorm</title>
+    </head>
+    
+    <body>
+        <div align="right">
+            <a href="/"><b>Return to Main Page</b></a>
+            |  <a href="/load"><b>Load a Whiteboard</b></a>
+            |  Hello, <a href='/profile'><b>{{ g.user[1] }}</b></a>
+            
+        </div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

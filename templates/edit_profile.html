@@ -1,0 +1,65 @@
+<html>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        window.addEventListener ("load", function () {
+            var checkbox = document.getElementById ('{{form.toggle_pw.id}}');
+            var x = document.getElementById ('{{form.password.id}}');
+            checkbox.addEventListener ('change', function () {
+                if (this.checked) {
+                    x.type = 'text';
+                } else {
+                    x.type = 'password';
+                }
+            });
+        })
+    </script>
+
+    <div class="container">
+    <h1>Edit Profile Page for User: {{ g.user[1] }}</h1>
+    Please update and edit any information you need to for Project-Brainstorm below:
+    <br>
+    {% for field, errors in form.errors.items() %}
+        <p style="color: red">{{ ', '.join(errors) }}</p>
+    {% endfor %}
+    <br>
+    <form class="form-horizontal" method="POST" action= {{ url_for('edit_profile') }}>
+        {{ form.csrf_token() }}
+        <p>Update your password below:</p>
+         <div class="form-group">
+             {{ form.password.label }}
+             {{ form.password(class="form-control") }}
+        </div>
+         <div class="form-group">
+             {{ form.confirm_pw.label }}
+             {{ form.confirm_pw(class="form-control") }}
+        </div>
+        <div class="form-group">
+             {{ form.toggle_pw.label }}
+             {{ form.toggle_pw(class="form-control") }}
+        </div>
+
+        <p><br>Edit and update and Personal information below:</p>
+        <div class="form-group">
+            {{ form.first_name.label }}
+            {{ form.first_name(class="form-control") }}
+        </div>
+         <div class="form-group">
+            {{ form.last_name.label }}
+            {{ form.last_name(class="form-control") }}
+        </div>
+         <div class="form-group">
+            {{ form.dob.label }}
+            {{ form.dob }}
+        </div>
+         <div class="form-group">
+            {{ form.gender.label }}
+            {{ form.gender }}
+        </div>
+        <br>
+         <div class="form-group">
+            {{ form.submit }}
+        </div>
+    </form>
+</div>
+
+</html>
