@@ -13,25 +13,77 @@
             });
         })
     </script>
-    <h1>Confirm Identity {{ g.user[1] }}</h1>
+    <head>
+        <style>
+            .flex-parent {
+                display: flex;
+                }
+
+                .jc-center {
+                justify-content: center;
+                }
+
+                button.margin-right {
+                margin-right: 20px;
+                }
+                .button {
+                background-color: #1c87c9;
+                border: none;
+                color: white;
+                padding: 20px 34px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                margin: 4px 2px;
+                cursor: pointer;
+                margin-left: auto;
+                margin-right: auto;
+                border: black;
+            }
+            .container{
+                width: 20%;
+                margin: auto;
+                margin-top: 150px;
+                box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+                border-radius: 5px;
+                position: relative;
+                z-index: 1;
+                background: inherit;
+                overflow: hidden;
+                padding: 20px;
+            }
+            p{
+                text-align: center;
+            }
+        </style>
+    </head>
+    
+    <div class="container">
+        <h1>Confirm Identity {{ g.user[1] }}</h1>
     <br>
     {% for field, errors in form.errors.items() %}
         <p style="color: red">{{ ', '.join(errors) }}</p>
     {% endfor %}
     <br>
-    <form class="form-horizontal" method="POST" action="{{ url_for('confirm_identity') }}">
-        {{ form.csrf_token() }}
-        <div class="form-group">
-             {{ form.password.label }}
-             {{ form.password(class="form-control") }}
-        </div>
-        <div class="form-group">
-             {{ form.toggle_pw.label }}
-             {{ form.toggle_pw(class="form-control") }}
-        </div>
-         <div class="form-group">
-            {{ form.submit }}
-        </div>
-    </form>
+        <form class="form-horizontal" method="POST" action="{{ url_for('confirm_identity') }}">
+            {{ form.csrf_token() }}
+            <div class="form-group">
+                 {{ form.password.label }}
+                 {{ form.password(class="form-control") }}
+            </div>
+            <div class="form-group">
+                 {{ form.toggle_pw.label }}
+                 {{ form.toggle_pw(class="form-control") }}
+            </div>
+             <div class="form-group">
+                {{ form.submit }}
+            </div>
+        </form>
+        <div class="flex-parent jc-center">
+            <a href="/" class="button" class="green margin-right">Home</a>
+            </div>
+    </div>
+    
 
 </html>
